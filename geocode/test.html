@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="map" style="height: 400px;"></div>
+
+    <script>// Crear un mapa con Leaflet
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        // Agregar una capa de mapa (por ejemplo, OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // Crear un arreglo de waypoints (latitud y longitud)
+        var waypoints = [
+          [51.5, -0.1],
+          [51.51, -0.08],
+          [51.52, -0.1],
+          [51.53, -0.12]
+        ];
+
+        // Crear una capa de marcadores para los waypoints
+        var markersLayer = L.layerGroup().addTo(map);
+
+        // Agregar los marcadores al mapa
+        for (var i = 0; i < waypoints.length; i++) {
+          L.marker(waypoints[i]).addTo(markersLayer);
+        }
+
+        // Crear una ruta usando los waypoints
+        L.Routing.control({
+          waypoints: waypoints
+        }).addTo(map);
+        </script>
+</body>
+</html>
